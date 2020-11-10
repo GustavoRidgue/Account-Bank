@@ -1,12 +1,10 @@
 package com.accountbank;
 
-import com.accountbank.holder.HolderAccount;
+import com.accountbank.person.HolderAccount;
 import com.accountbank.type.AccountType;
 
-import java.util.Date;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Timer;
 
 public class Account {
     Scanner read = new Scanner(System.in);
@@ -23,7 +21,7 @@ public class Account {
         this.setStatus(true);
 
         if (holder == null || type == null || password <= 0 || !checkAccount(type)) {
-            System.out.println("Faled to create this account. It can not content negative or null values");
+            System.out.println("Failed to create this account. It can not content negative or null values");
             this.setStatus(false);
             Random generatorNewPassword = new Random(999999);
             this.setAccountPassword(generatorNewPassword.nextInt(999999));
@@ -203,7 +201,7 @@ public class Account {
                     "Status: " + this.getStatus() + ".\n"
             );
         } else {
-            System.out.println("invalid password");
+            System.out.println("Invalid password");
         }
     }
 }

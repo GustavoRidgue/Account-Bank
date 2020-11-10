@@ -1,4 +1,4 @@
-package com.accountbank.holder;
+package com.accountbank.person;
 
 import java.time.LocalDate;
 

@@ -1,6 +1,6 @@
 package com.accountbank;
 
-import com.accountbank.holder.HolderAccount;
+import com.accountbank.person.HolderAccount;
 import com.accountbank.type.AccountType;
 
 import java.time.LocalDate;
