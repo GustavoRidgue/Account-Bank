@@ -20,37 +20,39 @@ public class Account {
     protected static int totalOfAccounts;
 
     public Account(HolderAccount holder, String type, int password) {
+        this.setStatus(true);
+
         if (holder == null || type == null || password <= 0 || !checkAccount(type)) {
             System.out.println("Faled to create this account. It can not content negative or null values");
-            this.status = false;
+            this.setStatus(false);
             Random generatorNewPassword = new Random(999999);
-            this.accountPassword = generatorNewPassword.nextInt(999999);
+            this.setAccountPassword(generatorNewPassword.nextInt(999999));
         } else {
             System.out.println("Congratulations " + holder.getHolderName() +
                     ", your account was created successfully");
             totalOfAccounts++;
-            this.accountHolder = holder;
-            this.accountPassword = password;
-            this.status = true;
+            this.setAccountHolder(holder);
+            this.setAccountPassword(password);
 
             Random generator = new Random(5000);
-            this.accountBankBranch = generator.nextInt(1000);
-            this.accountNumber = generator.nextInt(100000 + this.accountPassword + totalOfAccounts);
+            this.setAccountBankBranch(generator.nextInt(1000));
+            this.setAccountNumber(generator.nextInt(100000 + this.accountPassword + totalOfAccounts));
         }
     }
 
     public boolean checkAccount(String type) {
-        if (type.toLowerCase().toLowerCase().equals("current account")) {
+        if (type.toLowerCase().equals("current account")) {
             this.accountType = "Current Account";
             this.deposit(50);
             return true;
         }
-        else if (type.toLowerCase().toLowerCase().equals("saving account")) {
+        else if (type.toLowerCase().equals("saving account")) {
             this.accountType = "Saving Account";
             this.deposit(150);
             return true;
         } else {
-            System.out.println("Wrong account type. Options:\n" +
+            System.out.println(
+                    "Wrong account type. Options:\n" +
                     "Current account\n" +
                     "Saving account");
             return false;
@@ -58,55 +60,86 @@ public class Account {
     }
 
     public void deposit(double depositAmount) {
-        if (status){
+        if (this.getStatus()){
             this.accountBalance += depositAmount;
+            System.out.println("Deposit successfully completed");
+        } else {
+            System.out.println("Failed to deposit");
         }
     }
 
-    public boolean withdraw(double withdrawAmount) {
-        if (this.getAccountBalance() > -200 && status) {
+    public void withdraw(double withdrawAmount) {
+        if (this.getAccountBalance() > -200 && this.getStatus()) {
             this.accountBalance -= withdrawAmount;
             System.out.println("Withdraw successfully completed");
-            return true;
         } else {
-            System.out.println("Insufficient money/n" +
-                    "Your balance: " + this.accountBalance +
-                    "Withdraw amount: " + withdrawAmount);
-            return false;
+            System.out.println(
+                    "Insufficient money/n" +
+                    "Your balance: " + this.getAccountBalance() +
+                    "Withdraw amount: " + withdrawAmount
+            );
         }
     }
 
-    public boolean withdrawAll(int passwordToWithdraw) {
-        if (this.accountPassword == passwordToWithdraw) {
-            this.accountBalance -= this.accountBalance;
-            return true;
+    public void withdrawAll(int passwordToWithdraw) {
+        if (this.getAccountPassword() == passwordToWithdraw && this.getAccountBalance() > 0) {
+            this.withdraw(this.getAccountBalance());
+            System.out.println("Withdraw all successfully completed");
         } else {
-            System.out.println("Invalid password");
-            return false;
+            System.out.println("Invalid password or negative money");
         }
     }
 
-    public boolean transfer(double transferAmount, Account targetAccount) {
-        if (this.accountBalance >= transferAmount && status) {
-            this.accountBalance -= transferAmount;
+    public void transfer(double transferAmount, Account targetAccount) {
+        if (this.getAccountBalance() >= transferAmount && this.getStatus() && targetAccount.getStatus()) {
+            this.withdraw(transferAmount);
             targetAccount.deposit(transferAmount);
-            return true;
+            System.out.println("Transfer successfully completed");
         } else {
-            System.out.println("Insufficient money \n" +
-                    "Your balance: " + this.accountBalance + "\n" +
-                    "Transfer amount: " + transferAmount);
-            return false;
+            System.out.println(
+                    "Insufficient money or closed account \n" +
+                    "Your balance: " + this.getAccountBalance() + "\n" +
+                    "Transfer amount: " + transferAmount
+            );
         }
     }
 
     public void payMonthlyFee() {
-        if (this.accountType.equals("Current Account")) {
-            this.accountBalance -= 100;
+        if (this.getAccountType().equals("Current Account")) {
+            this.withdraw(100);
+            System.out.println("Monthly fee successfully payed");
         }
-        else if (this.accountType.equals("Saving Account")) {
-            this.accountBalance -= 50;
+        else if (this.getAccountType().equals("Saving Account")) {
+            this.withdraw(50);
+            System.out.println("Monthly fee successfully payed");
         } else {
             System.out.println("Invalid operation. We can't found the account type");
+        }
+    }
+
+    public void closeAccount(int passwordAccount) {
+        if (passwordAccount == this.getAccountPassword() && this.getAccountBalance() >= 0) {
+            if (!this.getStatus() && this.getAccountBalance() < 0) {
+                System.out.println("Error: you can't close your account with negative balance");
+            } else {
+                System.out.println("Account successfully closed");
+                this.setStatus(false);
+            }
+        } else {
+            System.out.println("Operation failed: Invalid password or insufficient money");
+        }
+    }
+
+    public void reopenAccount(int passwordAccount) {
+        if (passwordAccount == this.getAccountPassword()) {
+            if (this.getStatus()) {
+                System.out.println("Your account is already opened");
+            } else {
+                System.out.println("Account successfully opened");
+                this.setStatus(true);
+            }
+        } else {
+            System.out.println("Operation failed: Invalid password!");
         }
     }
 
@@ -150,33 +183,27 @@ public class Account {
         this.accountPassword = accountPassword;
     }
 
-    public void closeAccount(int passwordAccount) {
-        if (passwordAccount == this.accountPassword && this.accountBalance >= 0) {
-            if (!this.status && this.accountBalance < 0) {
-                System.out.println("Error: you can't close your account with negative balance");
-            } else {
-                System.out.println("Account successfully closed");
-                this.status = false;
-            }
-        } else {
-            System.out.println("Operation failed: Invalid password or insufficient money");
-        }
-    }
-
-    public void reopenAccount(int passwordAccount) {
-        if (passwordAccount == this.accountPassword) {
-            if (this.status) {
-                System.out.println("Your account is already opened");
-            } else {
-                System.out.println("Account successfully opened");
-                this.status = true;
-            }
-        } else {
-            System.out.println("Operation failed: Invalid password!");
-        }
-    }
-
     public boolean getStatus() {
         return this.status;
+    }
+
+    private void setStatus(boolean status) {
+        this.status = status;
+    }
+
+    public void myAccount(int password) {
+        if (this.getAccountPassword() == password) {
+            System.out.println (
+                    "\n- " + this.getAccountHolder().getHolderName() + "'s account:\n" +
+                    "Account Balance: " + this.getAccountBalance() + ";\n" +
+                    "Account BankBranch: " + this.getAccountBankBranch() + ";\n" +
+                    "Account Number: " + this.getAccountNumber() + ";\n" +
+                    "Account Type: " + this.getAccountType() + ";\n" +
+                    "Account Password: " + this.getAccountPassword() + ";\n" +
+                    "Status: " + this.getStatus() + ".\n"
+            );
+        } else {
+            System.out.println("invalid password");
+        }
     }
 }
