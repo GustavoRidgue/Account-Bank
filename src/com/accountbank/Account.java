@@ -1,7 +1,6 @@
 package com.accountbank;
 
 import com.accountbank.person.HolderAccount;
-import com.accountbank.type.AccountType;
 
 import java.util.Random;
 import java.util.Scanner;

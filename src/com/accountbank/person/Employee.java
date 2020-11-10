@@ -2,26 +2,36 @@ package com.accountbank.person;
 
 public class Employee {
     private String name;
-    private int cpf;
-    private String salary;
+    private long cpf;
+    private float salary;
     private int number;
     private static int totalEmployees;
 
-    public Employee(String name, int cpf) {
-        if (cpf > 10)
+    public Employee(String name, long cpf) {
+        if (cpfSize(cpf) == 9) {
+            this.setCpf(cpf);
+        } else {
+            System.out.println("Invalid CPF!");
+        }
         totalEmployees++;
         this.setName(name);
-        this.setCpf(cpf);
         this.setNumber(totalEmployees);
+        this.setSalary(1250);
+
+        System.out.println("Welcome " + name + " to the ByteBank!");
     }
 
-    public static int cpfSize(int cpf) {
+    public static long cpfSize(long cpf) {
         cpf = Math.abs(cpf);
         if (cpf == 0) {
             return 1;
         } else {
             return (int) (Math.log10 (cpf) + 1);
         }
+    }
+
+    public float getBonus() {
+        return this.getSalary() * 1.1f;
     }
 
     public String getName() {
@@ -32,19 +42,19 @@ public class Employee {
         this.name = name;
     }
 
-    public int getCpf() {
+    public long getCpf() {
         return cpf;
     }
 
-    public void setCpf(int cpf) {
+    public void setCpf(long cpf) {
         this.cpf = cpf;
     }
 
-    public String getSalary() {
+    public float getSalary() {
         return salary;
     }
 
-    private void setSalary(String salary) {
+    private void setSalary(float salary) {
         this.salary = salary;
     }
 
