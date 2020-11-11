@@ -1,13 +1,13 @@
-package com.accountbank.person;
+package com.accountbank.person.worker;
 
-public class Employee {
+public abstract class Worker {
     private String name;
     private long cpf;
     private float salary;
     private int number;
     private static int totalEmployees;
 
-    public Employee(String name, long cpf) {
+    public Worker(String name, long cpf) {
         if (cpfSize(cpf) == 9) {
             this.setCpf(cpf);
         } else {
@@ -30,9 +30,7 @@ public class Employee {
         }
     }
 
-    public float getBonus() {
-        return this.getSalary() * 1.1f;
-    }
+    public abstract float getBonus();
 
     public String getName() {
         return name;
@@ -54,7 +52,7 @@ public class Employee {
         return salary;
     }
 
-    private void setSalary(float salary) {
+    protected void setSalary(float salary) {
         this.salary = salary;
     }
 
@@ -62,7 +60,7 @@ public class Employee {
         return number;
     }
 
-    private void setNumber(int number) {
+    protected void setNumber(int number) {
         this.number = number;
     }
 }

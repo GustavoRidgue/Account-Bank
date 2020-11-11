@@ -1,6 +1,6 @@
 package com.accountbank;
 
-import com.accountbank.person.Employee;
+import com.accountbank.person.worker.Employee;
 import com.accountbank.person.HolderAccount;
 
 import java.time.LocalDate;
