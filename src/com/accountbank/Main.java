@@ -1,6 +1,8 @@
 package com.accountbank;
 
 import com.accountbank.account.Account;
+import com.accountbank.account.CurrentAccount;
+import com.accountbank.account.SavingAccount;
 import com.accountbank.person.worker.Employee;
 import com.accountbank.person.HolderAccount;
 import com.accountbank.person.worker.Manager;
@@ -19,18 +21,22 @@ public class Main {
                 new HolderAccount("Arnaldo Costa", "98920249545",
                         LocalDate.of(2005, 2, 9), "Graphic Worker");
 
-        Account accountRidgue07 = new Account(gustavoRigue, "Current account", 274714);
-        Account accountBarbosa27 = new Account(gabrielBarbosa, "Saving account", 213314);
-        Account accountCosta44 = new Account(arnaldoCosta, "Current account", 232697);
+        CurrentAccount accountRidgue07 = new CurrentAccount(gustavoRigue, 274714);
+        SavingAccount accountBarbosa27 = new SavingAccount(gabrielBarbosa, 213314);
+        CurrentAccount accountCosta44 = new CurrentAccount(arnaldoCosta, 232697);
 
         Employee gustavo = new Employee("Gustavo Ridgue", 246967457);
-        Manager fernando = new Manager("F" +
-                "ernando Silva", 548294639);
+        Manager fernando = new Manager("Fernando Silva", 548294639);
+
+        accountBarbosa27.myAccount(213314);
 
         System.out.println(gustavo.getSalary());
         System.out.println(fernando.getSalary());
 
         System.out.println(gustavo.getBonus());
         System.out.println(fernando.getBonus());
+
+
+
     }
 }

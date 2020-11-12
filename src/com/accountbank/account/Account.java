@@ -5,21 +5,21 @@ import com.accountbank.person.HolderAccount;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Account {
+public abstract class Account {
     Scanner read = new Scanner(System.in);
     private double accountBalance;
     private int accountBankBranch;
     private int accountNumber;
-    private String accountType;
     private HolderAccount accountHolder;
     private int accountPassword;
     private boolean status;
     protected static int totalOfAccounts;
+    public abstract void payMonthlyFee();
 
-    public Account(HolderAccount holder, String type, int password) {
+    public Account(HolderAccount holder, int password) {
         this.setStatus(true);
 
-        if (holder == null || type == null || password <= 0 || !checkAccount(type)) {
+        if (holder == null || password <= 0) {
             System.out.println("Failed to create this account. It can not content negative or null values");
             this.setStatus(false);
             Random generatorNewPassword = new Random(999999);
@@ -34,25 +34,6 @@ public class Account {
             Random generator = new Random(5000);
             this.setAccountBankBranch(generator.nextInt(1000));
             this.setAccountNumber(generator.nextInt(100000 + this.accountPassword + totalOfAccounts));
-        }
-    }
-
-    public boolean checkAccount(String type) {
-        if (type.toLowerCase().equals("current account")) {
-            this.accountType = "Current Account";
-            this.deposit(50);
-            return true;
-        }
-        else if (type.toLowerCase().equals("saving account")) {
-            this.accountType = "Saving Account";
-            this.deposit(150);
-            return true;
-        } else {
-            System.out.println(
-                    "Wrong account type. Options:\n" +
-                    "Current account\n" +
-                    "Saving account");
-            return false;
         }
     }
 
@@ -101,18 +82,6 @@ public class Account {
         }
     }
 
-    public void payMonthlyFee() {
-        if (this.getAccountType().equals("Current Account")) {
-            this.withdraw(100);
-            System.out.println("Monthly fee successfully payed");
-        }
-        else if (this.getAccountType().equals("Saving Account")) {
-            this.withdraw(50);
-            System.out.println("Monthly fee successfully payed");
-        } else {
-            System.out.println("Invalid operation. We can't found the account type");
-        }
-    }
 
     public void closeAccount(int passwordAccount) {
         if (passwordAccount == this.getAccountPassword() && this.getAccountBalance() >= 0) {
@@ -160,10 +129,6 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public String getAccountType() {
-        return accountType;
-    }
-
     public HolderAccount getAccountHolder() {
         return accountHolder;
     }
@@ -195,7 +160,6 @@ public class Account {
                     "Account Balance: " + this.getAccountBalance() + ";\n" +
                     "Account BankBranch: " + this.getAccountBankBranch() + ";\n" +
                     "Account Number: " + this.getAccountNumber() + ";\n" +
-                    "Account Type: " + this.getAccountType() + ";\n" +
                     "Account Password: " + this.getAccountPassword() + ";\n" +
                     "Status: " + this.getStatus() + ".\n"
             );
