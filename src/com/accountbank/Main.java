@@ -1,7 +1,9 @@
 package com.accountbank;
 
+import com.accountbank.account.Account;
 import com.accountbank.person.worker.Employee;
 import com.accountbank.person.HolderAccount;
+import com.accountbank.person.worker.Manager;
 
 import java.time.LocalDate;
 
@@ -21,7 +23,14 @@ public class Main {
         Account accountBarbosa27 = new Account(gabrielBarbosa, "Saving account", 213314);
         Account accountCosta44 = new Account(arnaldoCosta, "Current account", 232697);
 
-        Employee fernando = new Employee("Fernando Silva", 246967457);
+        Employee gustavo = new Employee("Gustavo Ridgue", 246967457);
+        Manager fernando = new Manager("F" +
+                "ernando Silva", 548294639);
+
+        System.out.println(gustavo.getSalary());
+        System.out.println(fernando.getSalary());
+
+        System.out.println(gustavo.getBonus());
         System.out.println(fernando.getBonus());
     }
 }

@@ -1,4 +1,4 @@
-package com.accountbank;
+package com.accountbank.account;
 
 import com.accountbank.person.HolderAccount;
 
