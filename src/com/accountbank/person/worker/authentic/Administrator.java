@@ -1,7 +1,7 @@
 package com.accountbank.person.worker;
 
-public class BackEndDeveloper extends Worker {
-    public BackEndDeveloper(String name, long cpf) {
+public class Administrator extends Worker {
+    public Administrator(String name, long cpf) {
         super(name, cpf);
     }
 

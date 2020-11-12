@@ -1,9 +1,8 @@
 package com.accountbank;
 
-import com.accountbank.account.Account;
 import com.accountbank.account.CurrentAccount;
 import com.accountbank.account.SavingAccount;
-import com.accountbank.person.worker.Employee;
+import com.accountbank.person.worker.FrontEndDeveloper;
 import com.accountbank.person.HolderAccount;
 import com.accountbank.person.worker.Manager;
 
@@ -25,7 +24,7 @@ public class Main {
         SavingAccount accountBarbosa27 = new SavingAccount(gabrielBarbosa, 213314);
         CurrentAccount accountCosta44 = new CurrentAccount(arnaldoCosta, 232697);
 
-        Employee gustavo = new Employee("Gustavo Ridgue", 246967457);
+        FrontEndDeveloper gustavo = new FrontEndDeveloper("Gustavo Ridgue", 246967457);
         Manager fernando = new Manager("Fernando Silva", 548294639);
 
         accountBarbosa27.myAccount(213314);

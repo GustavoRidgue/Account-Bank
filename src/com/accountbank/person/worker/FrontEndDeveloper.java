@@ -1,8 +1,8 @@
 package com.accountbank.person.worker;
 
-public class Employee extends Worker {
+public class FrontEndDeveloper extends Worker {
 
-    public Employee(String name, long cpf) {
+    public FrontEndDeveloper(String name, long cpf) {
         super(name, cpf);
         super.setSalary(1250);
     }
