@@ -2,9 +2,11 @@ package com.accountbank.person.worker.authentic;
 
 import com.accountbank.person.worker.Worker;
 import com.accountbank.system.Authentic;
+import com.accountbank.system.Authenticator;
 
 public class Manager extends Worker implements Authentic {
     private int password;
+
     public Manager(String name, long cpf, int password) {
         super(name, cpf);
         super.setSalary(2000);
