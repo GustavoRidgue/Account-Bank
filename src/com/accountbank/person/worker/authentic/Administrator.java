@@ -5,7 +5,6 @@ import com.accountbank.system.Authentic;
 import com.accountbank.system.Authenticator;
 
 public class Administrator extends Worker implements Authentic {
-    private int password;
     public Authenticator authenticator;
 
     public Administrator(String name, long cpf, int password) {
