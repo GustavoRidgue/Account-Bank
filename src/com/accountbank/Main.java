@@ -9,43 +9,27 @@ import com.accountbank.person.worker.authentic.Administrator;
 import com.accountbank.person.worker.authentic.Director;
 import com.accountbank.person.worker.authentic.Manager;
 import com.accountbank.system.InternalSystem;
+import com.accountbank.tax.LifeInsurance;
+import com.accountbank.tax.TaxCalculator;
 
 import java.time.LocalDate;
 
 public class Main {
     public static void main(String[] args) {
-//        HolderAccount gustavoRigue =
-//                new HolderAccount("Gustavo Ridgue", "43257089542",
-//                        LocalDate.of(2005, 9, 30), "Programmer");
-//        HolderAccount gabrielBarbosa =
-//                new HolderAccount("Gabriel Barbosa", "40007445895",
-//                        LocalDate.of(1999, 5, 18), "Civil engineer");
-//        HolderAccount arnaldoCosta =
-//                new HolderAccount("Arnaldo Costa", "98920249545",
-//                        LocalDate.of(2005, 2, 9), "Graphic Worker");
-//
-//        CurrentAccount accountRidgue07 = new CurrentAccount(gustavoRigue, 274714);
-//        SavingAccount accountBarbosa27 = new SavingAccount(gabrielBarbosa, 213314);
-//        CurrentAccount accountCosta44 = new CurrentAccount(arnaldoCosta, 232697);
+        HolderAccount gustavoRigue =
+                new HolderAccount("Gustavo Ridgue", "43257089542",
+                        LocalDate.of(2005, 9, 30), "Programmer");
 
-        FrontEndDeveloper frontEndDeveloper = new FrontEndDeveloper("Gustavo Ridgue", 246967457);
-        Manager manager = new Manager("Fernando Silva", 548294639, 434243);
-        Director director = new Director("Fernando Silva", 548294639, 434243);
-        Administrator administrator = new Administrator("Fernando Silva", 548294639, 434243);
-        Client client = new Client("Fernando Silva", 548294639, 434243);
+        CurrentAccount accountRidgue07 = new CurrentAccount(gustavoRigue, 274714);
+        LifeInsurance lifeInsurance = new LifeInsurance();
 
-        InternalSystem system = new InternalSystem();
+        System.out.println(accountRidgue07.getAccountBalance()); // return 100
 
-        System.out.println("Authenticating Manager:");
-        manager.authentic(434243);
-        System.out.println("Authenticating Director:");
-        director.authentic(434243);
-        System.out.println("Authenticating Administrator:");
-        administrator.authentic(434243);
-        System.out.println("Authenticating Client");
-        client.authentic(434243);
+        TaxCalculator taxCalculator = new TaxCalculator();
+        taxCalculator.register(accountRidgue07); // return 1
+        taxCalculator.register(lifeInsurance); // return 42
 
-        //system.authentic(manager);
+        System.out.println(taxCalculator.getTax()); // return 43 (1 + 42)
 
     }
 }
