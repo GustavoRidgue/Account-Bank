@@ -1,17 +1,17 @@
 package com.accountbank.tax;
 
 public class TaxCalculator { //implements Taxable
-    private float tax;
+    private double tax;
 
     public void register(Taxable taxable) {
-        float taxAmount = taxable.getTax();
+        double taxAmount = taxable.getTax();
         this.tax += taxAmount;
     }
 
-    public float getTax() {
+    public double getTax() {
         return tax;
     }
-    public void setTax(float tax) {
+    public void setTax(double tax) {
         this.tax = tax;
     }
 }

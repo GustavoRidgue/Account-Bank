@@ -1,8 +1,9 @@
 package com.accountbank.account;
 
 import com.accountbank.person.HolderAccount;
+import com.accountbank.tax.Taxable;
 
-public class CurrentAccount extends Account {
+public class CurrentAccount extends Account implements Taxable {
     public CurrentAccount(HolderAccount holder, int password) {
         super(holder, password);
         this.deposit(100);
@@ -13,5 +14,10 @@ public class CurrentAccount extends Account {
         this.withdraw(100);
         System.out.println("Monthly fee successfully payed");
 
+    }
+
+    @Override
+    public double getTax() {
+        return super.getAccountBalance() * 0.01;
     }
 }

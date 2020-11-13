@@ -1,5 +1,5 @@
 package com.accountbank.tax;
 
 public interface Taxable {
-    public abstract float getTax();
+    public abstract double getTax();
 }
