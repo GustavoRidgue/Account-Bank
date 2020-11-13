@@ -5,6 +5,7 @@ import com.accountbank.account.SavingAccount;
 import com.accountbank.person.worker.FrontEndDeveloper;
 import com.accountbank.person.HolderAccount;
 import com.accountbank.person.worker.authentic.Manager;
+import com.accountbank.system.InternalSystem;
 
 import java.time.LocalDate;
 
@@ -26,7 +27,10 @@ public class Main {
 
         FrontEndDeveloper gustavo = new FrontEndDeveloper("Gustavo Ridgue", 246967457);
         Manager fernando = new Manager("Fernando Silva", 548294639, 434243);
+        InternalSystem system = new InternalSystem();
 
+        fernando.authentic(434243);
+        system.authentic(fernando);
 
     }
 }
