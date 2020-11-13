@@ -1,8 +1,9 @@
 package com.accountbank.person.worker.authentic;
 
 import com.accountbank.person.worker.Worker;
+import com.accountbank.system.Authentic;
 
-public class Administrator extends Worker {
+public class Administrator extends Worker implements Authentic {
     private int password;
 
     public Administrator(String name, long cpf, int password) {
@@ -20,10 +21,22 @@ public class Administrator extends Worker {
         return 0;
     }
 
-    public int getPassword() {
-        return password;
+    @Override
+    public void authentic(int password) {
+        if (password == this.getPassword()) {
+            System.out.println("Entering in the system...");
+        } else {
+            System.out.println("Invalid password.");
+        }
     }
+
+    @Override
     public void setPassword(int password) {
         this.password = password;
+    }
+
+    @Override
+    public int getPassword() {
+        return this.password;
     }
 }

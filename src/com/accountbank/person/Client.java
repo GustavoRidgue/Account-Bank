@@ -7,12 +7,10 @@ public class Client implements Authentic {
 
     @Override
     public void authentic(int password) {
-        public void authentic(int password) {
-            if (password == this.getPassword()) {
-                System.out.println("Entering in the system...");
-            } else {
-                System.out.println("Invalid password.");
-            }
+        if (password == this.getPassword()) {
+            System.out.println("Entering in the system...");
+        } else {
+            System.out.println("Invalid password.");
         }
     }
 
@@ -22,7 +20,7 @@ public class Client implements Authentic {
     }
 
     @Override
-    public int getPassword(int password) {
+    public int getPassword() {
         return this.password;
     }
 }
