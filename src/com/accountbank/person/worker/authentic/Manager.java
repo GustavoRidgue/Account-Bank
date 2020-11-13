@@ -6,10 +6,13 @@ import com.accountbank.system.Authenticator;
 
 public class Manager extends Worker implements Authentic {
     private int password;
+    public Authenticator authenticator;
 
     public Manager(String name, long cpf, int password) {
         super(name, cpf);
         super.setSalary(2000);
+        this.authenticator = new Authenticator();
+
         if (password > 999 && password < 999999) {
             this.setPassword(password);
         } else {
@@ -24,22 +27,16 @@ public class Manager extends Worker implements Authentic {
 
     @Override
     public boolean authentic(int password) {
-        if (password == this.getPassword()) {
-            System.out.println("Entering in the system...");
-            return true;
-        } else {
-            System.out.println("Invalid password.");
-            return false;
-        }
+        return this.authenticator.authentic(this.getPassword());
     }
 
     @Override
     public void setPassword(int password) {
-        this.password = password;
+        this.authenticator.setPassword(password);
     }
 
     @Override
     public int getPassword() {
-        return this.password;
+        return this.authenticator.getPassword();
     }
 }

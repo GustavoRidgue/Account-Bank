@@ -2,8 +2,11 @@ package com.accountbank;
 
 import com.accountbank.account.CurrentAccount;
 import com.accountbank.account.SavingAccount;
+import com.accountbank.person.Client;
 import com.accountbank.person.worker.FrontEndDeveloper;
 import com.accountbank.person.HolderAccount;
+import com.accountbank.person.worker.authentic.Administrator;
+import com.accountbank.person.worker.authentic.Director;
 import com.accountbank.person.worker.authentic.Manager;
 import com.accountbank.system.InternalSystem;
 
@@ -25,12 +28,24 @@ public class Main {
 //        SavingAccount accountBarbosa27 = new SavingAccount(gabrielBarbosa, 213314);
 //        CurrentAccount accountCosta44 = new CurrentAccount(arnaldoCosta, 232697);
 
-        FrontEndDeveloper gustavo = new FrontEndDeveloper("Gustavo Ridgue", 246967457);
-        Manager fernando = new Manager("Fernando Silva", 548294639, 434243);
+        FrontEndDeveloper frontEndDeveloper = new FrontEndDeveloper("Gustavo Ridgue", 246967457);
+        Manager manager = new Manager("Fernando Silva", 548294639, 434243);
+        Director director = new Director("Fernando Silva", 548294639, 434243);
+        Administrator administrator = new Administrator("Fernando Silva", 548294639, 434243);
+        Client client = new Client("Fernando Silva", 548294639, 434243);
+
         InternalSystem system = new InternalSystem();
 
-        fernando.authentic(434243);
-        system.authentic(fernando);
+        System.out.println("Authenticating Manager:");
+        manager.authentic(434243);
+        System.out.println("Authenticating Director:");
+        director.authentic(434243);
+        System.out.println("Authenticating Administrator:");
+        administrator.authentic(434243);
+        System.out.println("Authenticating Client");
+        client.authentic(434243);
+
+        //system.authentic(manager);
 
     }
 }

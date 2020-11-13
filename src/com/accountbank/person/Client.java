@@ -1,28 +1,34 @@
 package com.accountbank.person;
 
 import com.accountbank.system.Authentic;
+import com.accountbank.system.Authenticator;
 
-public class Client implements Authentic {
+public class Client extends Authenticator implements Authentic {
     private int password;
+    public Authenticator authenticator;
 
-    @Override
-    public boolean authentic(int password) {
-        if (password == this.getPassword()) {
-            System.out.println("Entering in the system...");
-            return true;
+    public Client(String name, long cpf, int password) {
+        this.authenticator = new Authenticator();
+
+        if (password > 999 && password < 999999) {
+            this.setPassword(password);
         } else {
-            System.out.println("Invalid password.");
-            return false;
+            System.out.println("Invalid number of password.");
         }
     }
 
     @Override
+    public boolean authentic(int password) {
+        return this.authenticator.authentic(this.getPassword());
+    }
+
+    @Override
     public void setPassword(int password) {
-        this.password = password;
+        this.authenticator.setPassword(password);
     }
 
     @Override
     public int getPassword() {
-        return this.password;
+        return this.authenticator.getPassword();
     }
 }
