@@ -1,5 +1,4 @@
 package com.accountbank.system;
 
-public class InternalSystem {
+public abstract class InternalSystem {
 }
- 
