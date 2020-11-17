@@ -15,7 +15,7 @@ public abstract class Account {
     private int accountPassword;
     private boolean status;
     protected static int totalOfAccounts;
-    public abstract void payMonthlyFee();
+    public abstract void payMonthlyFee() throws InsufficientFundsException;
 
     public Account(HolderAccount holder, int password) {
         this.setStatus(true);
@@ -47,15 +47,15 @@ public abstract class Account {
         }
     }
 
-    public void withdraw(double withdrawAmount) {
+    public void withdraw(double withdrawAmount) throws InsufficientFundsException {
         if (this.getAccountBalance() < withdrawAmount || !this.getStatus()) {
-            throw new InsufficientFundsException("Your balance: " + this.getAccountBalance() + ", Withdraw amount: " + withdrawAmount);
+            throw new InsufficientFundsException("Your balance: " + this.getAccountBalance() + ", withdraw amount: " + withdrawAmount);
         }
         this.accountBalance -= withdrawAmount;
         System.out.println("Withdraw successfully completed");
     }
 
-    public void withdrawAll(int passwordToWithdraw) {
+    public void withdrawAll(int passwordToWithdraw) throws InsufficientFundsException {
         if (this.getAccountPassword() == passwordToWithdraw && this.getAccountBalance() > 0) {
             this.withdraw(this.getAccountBalance());
             System.out.println("Withdraw all successfully completed");
@@ -64,7 +64,7 @@ public abstract class Account {
         }
     }
 
-    public void transfer(double transferAmount, Account targetAccount) {
+    public void transfer(double transferAmount, Account targetAccount) throws InsufficientFundsException {
         this.withdraw(transferAmount);
         targetAccount.deposit(transferAmount);
         System.out.println("Transfer successfully completed");
