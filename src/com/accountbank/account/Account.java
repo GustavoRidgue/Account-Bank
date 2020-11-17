@@ -1,6 +1,6 @@
 package com.accountbank.account;
 
-import com.accountbank.exceptions.InsufficientFunds;
+import com.accountbank.exceptions.InsufficientFundsException;
 import com.accountbank.person.HolderAccount;
 
 import java.util.Random;
@@ -49,7 +49,7 @@ public abstract class Account {
 
     public void withdraw(double withdrawAmount) {
         if (this.getAccountBalance() < withdrawAmount || !this.getStatus()) {
-            throw new InsufficientFunds("Your balance: " + this.getAccountBalance() + ", Withdraw amount: " + withdrawAmount);
+            throw new InsufficientFundsException("Your balance: " + this.getAccountBalance() + ", Withdraw amount: " + withdrawAmount);
         }
         this.accountBalance -= withdrawAmount;
         System.out.println("Withdraw successfully completed");

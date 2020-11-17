@@ -2,6 +2,7 @@ package com.accountbank;
 
 import com.accountbank.account.CurrentAccount;
 import com.accountbank.account.SavingAccount;
+import com.accountbank.exceptions.InsufficientFundsException;
 import com.accountbank.person.Client;
 import com.accountbank.person.worker.FrontEndDeveloper;
 import com.accountbank.person.HolderAccount;
@@ -32,7 +33,11 @@ public class Main {
         //System.out.println(taxCalculator.getTax()); // return 43 (1 + 42)
 
         accountRidgue07.deposit(500);
-        accountRidgue07.withdraw(700);
+        try {
+            accountRidgue07.withdraw(700);
+        } catch (InsufficientFundsException exception) {
+            System.out.println("Exception!!! " + exception.getMessage());
+        }
         System.out.println(accountRidgue07.getAccountBalance());
     }
 }
