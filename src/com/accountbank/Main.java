@@ -21,15 +21,18 @@ public class Main {
                         LocalDate.of(2005, 9, 30), "Programmer");
 
         CurrentAccount accountRidgue07 = new CurrentAccount(gustavoRigue, 274714);
-        LifeInsurance lifeInsurance = new LifeInsurance();
+        //LifeInsurance lifeInsurance = new LifeInsurance();
+//
+        //System.out.println(accountRidgue07.getAccountBalance()); // return 100
+//
+        //TaxCalculator taxCalculator = new TaxCalculator();
+        //taxCalculator.register(accountRidgue07); // return 1
+        //taxCalculator.register(lifeInsurance); // return 42
+//
+        //System.out.println(taxCalculator.getTax()); // return 43 (1 + 42)
 
-        System.out.println(accountRidgue07.getAccountBalance()); // return 100
-
-        TaxCalculator taxCalculator = new TaxCalculator();
-        taxCalculator.register(accountRidgue07); // return 1
-        taxCalculator.register(lifeInsurance); // return 42
-
-        System.out.println(taxCalculator.getTax()); // return 43 (1 + 42)
-
+        accountRidgue07.deposit(500);
+        accountRidgue07.withdraw(700);
+        System.out.println(accountRidgue07.getAccountBalance());
     }
 }

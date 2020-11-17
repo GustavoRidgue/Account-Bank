@@ -1,5 +1,6 @@
 package com.accountbank.account;
 
+import com.accountbank.exceptions.InsufficientFunds;
 import com.accountbank.person.HolderAccount;
 
 import java.util.Random;
@@ -47,16 +48,11 @@ public abstract class Account {
     }
 
     public void withdraw(double withdrawAmount) {
-        if (this.getAccountBalance() > -200 && this.getStatus()) {
-            this.accountBalance -= withdrawAmount;
-            System.out.println("Withdraw successfully completed");
-        } else {
-            System.out.println(
-                    "Insufficient money/n" +
-                    "Your balance: " + this.getAccountBalance() +
-                    "Withdraw amount: " + withdrawAmount
-            );
+        if (this.getAccountBalance() < withdrawAmount || !this.getStatus()) {
+            throw new InsufficientFunds("Your balance: " + this.getAccountBalance() + ", Withdraw amount: " + withdrawAmount);
         }
+        this.accountBalance -= withdrawAmount;
+        System.out.println("Withdraw successfully completed");
     }
 
     public void withdrawAll(int passwordToWithdraw) {
@@ -69,19 +65,10 @@ public abstract class Account {
     }
 
     public void transfer(double transferAmount, Account targetAccount) {
-        if (this.getAccountBalance() >= transferAmount && this.getStatus() && targetAccount.getStatus()) {
-            this.withdraw(transferAmount);
-            targetAccount.deposit(transferAmount);
-            System.out.println("Transfer successfully completed");
-        } else {
-            System.out.println(
-                    "Insufficient money or closed account \n" +
-                    "Your balance: " + this.getAccountBalance() + "\n" +
-                    "Transfer amount: " + transferAmount
-            );
-        }
+        this.withdraw(transferAmount);
+        targetAccount.deposit(transferAmount);
+        System.out.println("Transfer successfully completed");
     }
-
 
     public void closeAccount(int passwordAccount) {
         if (passwordAccount == this.getAccountPassword() && this.getAccountBalance() >= 0) {
