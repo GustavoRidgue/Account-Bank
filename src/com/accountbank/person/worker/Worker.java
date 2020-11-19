@@ -1,5 +1,11 @@
 package com.accountbank.person.worker;
 
+/**
+ * This class represents the main actions of a worker
+ * @author Gustavo Ridgue
+ * @version 0.1
+ */
+
 public abstract class Worker {
     private String name;
     private long cpf;

@@ -16,26 +16,40 @@ import com.accountbank.tax.TaxCalculator;
 import java.time.LocalDate;
 
 public class Main {
-    public static void main(String[] args) throws InsufficientFundsException {
-        HolderAccount gustavoRigue =
-                new HolderAccount("Gustavo Ridgue", "43257089542",
-                        LocalDate.of(2005, 9, 30), "Programmer");
+    public static void main(String[] args) throws Exception {
+        try (Conexao conexao = new Conexao()) {
+            conexao.leDados();
+        } catch (IllegalStateException exception) {
+            System.out.println("Error to connect");
+        }
 
-        HolderAccount gabrielBarbosa =
-                new HolderAccount("Gustavo Ridgue", "43257089542",
-                        LocalDate.of(2005, 9, 30), "Programmer");
+        /*
+        * public abstract class Conta {
 
-        CurrentAccount accountRidgue07 = new CurrentAccount(gustavoRigue, 100100);
-        CurrentAccount accountBarbosa27 = new CurrentAccount(gabrielBarbosa, 444444);
+        //atributos omitidos
 
-        accountRidgue07.deposit(500);
-        accountRidgue07.transfer(700, accountBarbosa27);
-        accountRidgue07.withdraw(700);
-        //try {
-        //    accountRidgue07.transfer(700, accountBarbosa27);
-        //} catch (InsufficientFundsException exception) {
-        //    System.out.println("Exception!!! " + exception.getMessage());
-        //}
-        System.out.println(accountRidgue07.getAccountBalance());
+        public Conta(int agencia, int numero){
+
+            if(agencia < 1) {
+                throw new IllegalArgumentException("Agencia inválida");
+            }
+
+            if(numero < 1) {
+                throw new IllegalArgumentException("Numero da conta inválido");
+            }
+
+            //resto do construtor foi omitido
+    }
+    **/
+
+//        Conexao conexao = null;
+//        try {
+//            conexao = new Conexao();
+//            conexao.leDados();
+//        } catch (IllegalStateException exception) {
+//            System.out.println("Error to connect");
+//        } finally {
+//            conexao.fecha();
+//        }
     }
 }

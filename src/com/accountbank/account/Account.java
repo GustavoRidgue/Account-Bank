@@ -6,6 +6,12 @@ import com.accountbank.person.HolderAccount;
 import java.util.Random;
 import java.util.Scanner;
 
+/**
+ * This class represents the main actions of an account
+ * @author Gustavo Ridgue
+ * @version 0.1
+ */
+
 public abstract class Account {
     Scanner read = new Scanner(System.in);
     private double accountBalance;
@@ -16,6 +22,12 @@ public abstract class Account {
     private boolean status;
     protected static int totalOfAccounts;
     public abstract void payMonthlyFee() throws InsufficientFundsException;
+
+    /**
+     * Constructor to create an account
+     * @param holder this is the holder account
+     * @param password this is the account password
+     */
 
     public Account(HolderAccount holder, int password) {
         this.setStatus(true);
